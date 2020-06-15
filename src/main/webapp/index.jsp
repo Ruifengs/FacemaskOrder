@@ -1,5 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<head>
+    <title>主界面</title>
+</head>
 <body>
-<h2>Hello World!</h2>
+<a href="facemask/main">跳转到库存管理</a>
 </body>
 </html>
