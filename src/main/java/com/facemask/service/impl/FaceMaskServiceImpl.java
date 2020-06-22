@@ -19,8 +19,9 @@ public class FaceMaskServiceImpl implements FaceMaskService {
         //判断是否已经存在该名称的口罩
         if (facemaskMapper.findByName(f.getF_name()) == null) {
             return facemaskMapper.save_f(f);
-        }else
+        }else {
             return 0;
+        }
     }
 
     @Override

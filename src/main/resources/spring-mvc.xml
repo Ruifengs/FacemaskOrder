@@ -17,4 +17,7 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <!--异常处理器-->
+    <bean class="com.facemask.exception.GlobalExceptionResolver" id="exceptionResolver"/>
 </beans>
