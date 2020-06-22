@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -32,4 +33,7 @@ public interface FacemaskMapper {
     //查询口罩总库存
     @Select("select sum(f_inventory) from facemask")
     int findInventory();
+    //根据id查某种口罩的库存
+    @Select("select f_inventory from facemask where f_ID=#{id};")
+    int findInventoryByFid(Integer id);
 }

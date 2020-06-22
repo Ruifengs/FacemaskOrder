@@ -45,8 +45,9 @@ public class FaceMaskController {
         //否则跳转到失败提示界面
         if (res == 1) {
             return "facemask/f_success";
-        } else
+        } else {
             return "facemask/f_fail";
+        }
     }
 
     @Autowired
