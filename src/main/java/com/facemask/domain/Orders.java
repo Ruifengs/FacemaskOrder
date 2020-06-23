@@ -5,57 +5,30 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- *  预约订单实体类
+ * 预约订单实体类
  */
 public class Orders {
-    private String orderId;
-    private String pName;
-    private String pId;
-    private String idNum;
-    private long phoneNum;
-    private Integer fmaskId;
-    private Integer fmaskNum;
-    private float fmaskPrice;
-    private Date orderTime;
+    private Integer orderId;     //订单号
+    private Integer pId;         //用户ID
+    private Integer fmaskId;     //口罩ID
+    private Integer fmaskNum;    //预约口罩数量
+    private float fmaskPrice;    //口罩总价
+    private Date orderTime;      //预约时间
 
-    public String getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 
-    public String getpName() {
-        return pName;
-    }
-
-    public void setpName(String pName) {
-        this.pName = pName;
-    }
-
-    public String getpId() {
+    public Integer getpId() {
         return pId;
     }
 
-    public void setpId(String pId) {
+    public void setpId(Integer pId) {
         this.pId = pId;
-    }
-
-    public String getIdNum() {
-        return idNum;
-    }
-
-    public void setIdNum(String idNum) {
-        this.idNum = idNum;
-    }
-
-    public long getPhoneNum() {
-        return phoneNum;
-    }
-
-    public void setPhoneNum(long phoneNum) {
-        this.phoneNum = phoneNum;
     }
 
     public Integer getFmaskId() {
@@ -86,18 +59,15 @@ public class Orders {
         return orderTime;
     }
 
-    public void setOrderTime(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date orderTime) {
+    public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
     }
 
     @Override
     public String toString() {
         return "Orders{" +
-                "orderId='" + orderId + '\'' +
-                ", pName='" + pName + '\'' +
+                "orderId=" + orderId +
                 ", pId=" + pId +
-                ", idNum='" + idNum + '\'' +
-                ", phoneNum=" + phoneNum +
                 ", fmaskId=" + fmaskId +
                 ", fmaskNum=" + fmaskNum +
                 ", fmaskPrice=" + fmaskPrice +

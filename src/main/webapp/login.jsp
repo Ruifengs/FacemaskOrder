@@ -13,10 +13,10 @@
 <body>
 ${msg}
 <form method="post" action="person/personLoginSubmit">
-    账号：<input type="text" name="pId"><br>
-    密码：<input type="text" name="password"><br>
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
     <button type="submit">登录</button>
-    <button type="button"><a href="">注册</a> </button>
+    <button type="button"><a href="person/registered">注册</a> </button>
 </form>
 <form method="post" action="person/rootLoginSubmit">
     管理员账号：<input type="text" name="rootId"><br>

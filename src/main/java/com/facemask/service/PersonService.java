@@ -17,4 +17,7 @@ public interface PersonService {
 
     //返回所有普通用户信息
     List<Person> findAllperson();
+
+    //根据ID查找用户
+    Person findByID(Integer id);
 }
