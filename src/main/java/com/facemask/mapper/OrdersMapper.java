@@ -16,7 +16,7 @@ import java.util.List;
 public interface OrdersMapper {
 
     //添加订单
-    @Insert("insert into Orders (pId,pName,idNum,phoneNum,fmaskId,fmaskNum,fmaskPrice,orderTime) values(#{pId},#{pName},#{idNum},#{phoneNum},#{fmaskId},#{fmaskNum},#{fmaskPrice},#{orderTime})")
+    @Insert("insert into Orders (pId,fmaskId,fmaskNum,fmaskPrice,orderTime) values(#{pId},#{fmaskId},#{fmaskNum},#{fmaskPrice},#{orderTime})")
     int insertOrders(Orders orders);
 
     //返回所有订单

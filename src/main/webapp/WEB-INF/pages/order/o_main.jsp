@@ -10,18 +10,23 @@
 <html>
 <head>
     <title>这是预约页面</title>
+    <style type="text/css">
+        p#tips1 {
+            color: red;
+        }
+    </style>
 </head>
 <body>
+<p id="tips1">请确认信息是否正确！！！</p>
 <form method="post" action="orderSubmit">
-    姓&nbsp;&nbsp;&nbsp;&nbsp;名：<input type="text" name="pName"><br>
-    身份证号：<input type="text" name="idNum"><br>
-    手&nbsp;机&nbsp;号：<input type="text" name="phoneNum"><br>
+    姓&nbsp;&nbsp;&nbsp;&nbsp;名：<input type="text" name="pName" value="${person.pName}" readonly><br>
+    手&nbsp;机&nbsp;号：<input type="text" name="phoneNum" value="${person.phoneNum}" readonly><br>
     口罩类型：<select name="fmaskId">
         <c:forEach var="facemask" items="${facemasks}">`
         <option value =${facemask.f_ID} >${facemask.f_name}</option>
         </c:forEach>
-    </select>
-    口罩个数：<input name="fmaskNum" type="text" value="10">
+    </select><br>
+    口罩个数：<input name="fmaskNum" type="text" value="10"><br>
     价&nbsp;&nbsp;格：<input name="fmaskPrice" type="text" value="前端实现下根据口罩类型随价格变动（异步）">
     <button type="submit">预约</button>
 </form>

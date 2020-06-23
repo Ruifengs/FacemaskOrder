@@ -38,4 +38,9 @@ public class PersonServiceImpl implements PersonService {
     public List<Person> findAllperson() {
         return personMapper.findAllperson();
     }
+
+    @Override
+    public Person findByID(Integer id) {
+        return personMapper.findByID(id);
+    }
 }
