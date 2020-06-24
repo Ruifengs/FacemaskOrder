@@ -1,8 +1,6 @@
 package com.facemask.service.impl;
 
-import com.facemask.domain.Facemask;
 import com.facemask.domain.Orders;
-import com.facemask.domain.Person;
 import com.facemask.dto.OrderExecution;
 import com.facemask.enums.OrderStateEnum;
 import com.facemask.exception.NoNumberException;
@@ -62,23 +60,23 @@ public class OrdersServiceImpl implements OrdersService {
     //判断预约条件是否满足，主要判断是否有库存和有没有重复预约
     @Override
     @Transactional
-    public OrderExecution order(Orders orders) throws Exception{
+    public OrderExecution order(Orders orders) throws OrderException {
         //查看库存是否大于10
+        System.out.println("OrderExecution："+orders);
         try {
             int inventory = facemaskMapper.findInventoryByFid(orders.getFmaskId());
-            System.out.println(inventory);
             if (inventory < 10) {
                 throw new NoNumberException("没有库存");
             } else {
-                    Orders orders1 = ordersMapper.quaryOrderBypId(orders.getpId());
-                if (orders1.getpId()!=null) {
+                Orders orders1 = ordersMapper.quaryOrderBypId(orders.getpId());
+                if (orders1!=null) {
                     //重复预约
                     throw new RepeatOrderException("重复预约");
                 } else {
                     int insert = ordersMapper.insertOrders(orders);
                     int subtract = facemaskMapper.subtract_f(orders.getFmaskId());
                     String facemaskName = facemaskMapper.findF_Name(orders.getFmaskId());
-                    System.out.println("减库存");
+
                     return new OrderExecution(facemaskName,OrderStateEnum.SUCCESS);
                 }
 
@@ -88,8 +86,7 @@ public class OrdersServiceImpl implements OrdersService {
         } catch (RepeatOrderException e2) {
             throw e2;
         }catch (Exception e){
-            //所有编译期异常转换为运行期异常
-            throw new OrderException("order inner error: "+e.getMessage());
+            throw new OrderException("appoint inner error:" + e.getMessage());
         }
     }
 

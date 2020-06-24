@@ -65,7 +65,6 @@ public class OrderController {
         orders.setOrderTime(new Date());
         Facemask facemask = faceMaskService.findByID(orders.getFmaskId());
         Result<OrderExecution> result;
-        System.out.println("预约："+orders);
         OrderExecution orderExecution = null;
         try{
             orderExecution = ordersService.order(orders);
