@@ -18,10 +18,5 @@ ${msg}
     <button type="submit">登录</button>
     <button type="button"><a href="person/registered">注册</a> </button>
 </form>
-<form method="post" action="person/rootLoginSubmit">
-    管理员账号：<input type="text" name="rootId"><br>
-    密码：<input type="text" name="password"><br>
-    <button type="submit">登录</button>
-</form>
 </body>
 </html>

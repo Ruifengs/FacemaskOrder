@@ -1,12 +1,12 @@
 package com.facemask.controller;
 
 import com.facemask.domain.Person;
-import com.facemask.domain.Root;
 import com.facemask.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -53,27 +53,15 @@ public class PersonController {
         if (person1 != null) {
             session.setAttribute("person", person1);
             //判断用户权限  1--普通用户   0--管理员
-            if (person1.getPermissions() == 0)
+            if (person1.getPermissions() == 0) {
                 return "manage/manage";
-            else
+            } else {
                 return "person/p_main";
+            }
         } else {
             model.addAttribute("msg", "账号或密码错误，请重新输入！");
             return "redirect:/";
         }
-    }
-
-    //root管理员登录验证
-    @PostMapping("/rootLoginSubmit")
-    public String rootLoginSubmit(Root root, HttpSession session, Model model) {
-        Root root1 = personService.quaryRoot(root);
-        if (root1 != null) {
-            session.setAttribute("rootId", root.getRootId());
-            System.out.println(root1);
-            return "manage/manage";
-        }
-        model.addAttribute("msg", "账号或密码错误，请重新输入！");
-        return "/WEB-INF/login";
     }
 
     //用户管理
@@ -81,7 +69,7 @@ public class PersonController {
     public ModelAndView personManage() {
         ModelAndView mv = new ModelAndView();
         List<Person> persons = personService.findAllperson();
-        System.out.println(persons);
+        System.out.println("personManage"+persons);
         mv.setViewName("person/p_manage");
         mv.addObject("persons", persons);
         return mv;
@@ -94,4 +82,32 @@ public class PersonController {
         session.removeAttribute("person");
         return "redirect:/";
     }
+
+    //用户信息修改
+    @RequestMapping("/{pId}/personModify")
+    public ModelAndView personModify(@PathVariable("pId") Integer pId){
+        ModelAndView mv = new ModelAndView();
+        Person person = personService.findByID(pId);
+        mv.addObject("person",person);
+        mv.setViewName("person/p_modify");
+        return mv;
+    }
+
+    //用户信息修改提交
+    @RequestMapping("/{pId}/personModifySubmit")
+    public String personModifySubmit(Person person,@PathVariable Integer pId){
+        System.out.println("person:"+person+"  pId:"+pId);
+        person.setpId(pId);
+        int update = personService.updatePerson(person);
+        return "success";
+    }
+
+    //删除用户信息
+    @GetMapping("/{pId}/personDelete")
+    public String personDelete(@PathVariable Integer pId){
+        int delete = personService.delectPerson(pId);
+        System.out.println("deleteOK:"+delete);
+        return "success";
+    }
+
 }

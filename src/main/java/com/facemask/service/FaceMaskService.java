@@ -20,4 +20,8 @@ public interface FaceMaskService {
     public int findInventory();
     //查询上架口罩总库存
     public List<Facemask> findALL_UP();
+    //预约成功时减库存
+    int subtract_f(Integer f_ID);
+    //根据口罩ID查看口罩名
+    String findF_Name(Integer f_ID);
 }

@@ -11,10 +11,10 @@
     <title>用户首页</title>
 </head>
 <body>
+<jsp:include page="head.jsp"/>
 <h2>欢迎${sessionScope.person.username}</h2>
 <a href="/order/rules">口罩预约</a><br>
-<a>查看订单</a><br>
-<a>修改个人信息</a><br>
-<a href="/person/logout">注销账号</a>
+<a href="/order/${sessionScope.person.pId}/findBypId">查看订单</a><br>
+<a href="/person/${sessionScope.person.pId}/personModify">修改个人信息</a><br>
 </body>
 </html>

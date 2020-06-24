@@ -1,7 +1,6 @@
 package com.facemask.service;
 
 import com.facemask.domain.Person;
-import com.facemask.domain.Root;
 
 import java.util.List;
 
@@ -12,12 +11,15 @@ public interface PersonService {
     //验证登录用户
     public Person quaryPerson(Person person);
 
-    //验证管理员信息
-    public Root quaryRoot(Root root);
-
     //返回所有普通用户信息
     List<Person> findAllperson();
 
     //根据ID查找用户
     Person findByID(Integer id);
+
+    //更新用户信息
+    int updatePerson(Person person);
+
+    //删除用户
+    int delectPerson(Integer pId);
 }

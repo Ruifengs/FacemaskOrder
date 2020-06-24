@@ -1,5 +1,6 @@
 package com.facemask.dto;
 
+import com.facemask.enums.OrderStateEnum;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class OrderExecution {
 
     //口罩ID
-    private int f_id;
+    private String f_name;
     //返回状态值
     private int state;
     //返回信息
@@ -19,18 +20,18 @@ public class OrderExecution {
 
     }
 
-    public OrderExecution(int f_id, int state, String stateInfo) {
-        this.f_id = f_id;
-        this.state = state;
-        this.stateInfo = stateInfo;
+    public OrderExecution(String f_name, OrderStateEnum orderStateEnum) {
+        this.f_name = f_name;
+        this.state = orderStateEnum.getState();
+        this.stateInfo = orderStateEnum.getStateInfo();
     }
 
-    public int getF_id() {
-        return f_id;
+    public String getF_name() {
+        return f_name;
     }
 
-    public void setF_id(int f_id) {
-        this.f_id = f_id;
+    public void setF_name(String f_name) {
+        this.f_name = f_name;
     }
 
     public int getState() {
@@ -52,7 +53,7 @@ public class OrderExecution {
     @Override
     public String toString() {
         return "OrderExecution{" +
-                "f_id=" + f_id +
+                "f_name='" + f_name + '\'' +
                 ", state=" + state +
                 ", stateInfo='" + stateInfo + '\'' +
                 '}';

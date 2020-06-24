@@ -4,6 +4,7 @@ import com.facemask.domain.Orders;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,17 +24,20 @@ public interface OrdersMapper {
     @Select("select * from Orders")
     List<Orders> findAllOrders();
 
-    //根据预约人ID查询订单,每次只有一个订单，返回Orders
-    @Select("select * from Orders where pId=#{pId};")
-    Orders quaryOrderBypId(String pId);
+    //根据订单号查询订单
+    @Select("select * from Orders where orderId=#{orderId};")
+    Orders quaryOrderByorderId(Integer orderId);
 
-    //根据身份证号查询订单
-    @Select("select * from Orders where idNum=#{idNum};")
-    Orders quaryOrderByidNum(String idNum);
+    //根据pId查询订单
+    @Select("select pId from Orders where pId=#{pId}")
+    Orders quaryOrderBypId(Integer pId);
 
     //删除订单，口罩领取后删除订单
     @Delete("delete from Orders where orderId=#{orderId}")
     int deleteOrders(int orderId);
 
+    //修改订单
+    @Update("update orders set pId=#{pId},fmaskId=#{fmaskId},fmaskNum=#{fmaskNum},fmaskPrice=#{fmaskPrice},orderTime=#{orderTime} where orderId=#{orderId}")
+    int updateOrder(Orders orders);
 }
 

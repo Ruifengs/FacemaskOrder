@@ -11,6 +11,6 @@
     <title>Success</title>
 </head>
 <body>
-这里是success
+这是成功界面，前端简单得做个窗口之类的返回到原本的页面就好。
 </body>
 </html>
