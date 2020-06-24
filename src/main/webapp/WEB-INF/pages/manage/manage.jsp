@@ -5,12 +5,13 @@
   Time: 10:42
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
+<h2>欢迎${sessionScope.person.username}</h2>
 这是管理界面<br>
 <a href="/facemask/main">口罩管理</a><br>
 <a href="/person/personManage">用户管理</a><br>

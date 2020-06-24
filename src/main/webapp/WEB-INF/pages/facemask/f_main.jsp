@@ -55,7 +55,7 @@
 <body>
 <div id="container">
     <div id="save"><a href="save">口罩入库</a></div>
-    <div id="list">入库记录</div>
+    <div id="list"><a href="record?page=1&size=5">入库记录</a></div>
     <div id="inventory">
         <table>
             <tr>
@@ -74,6 +74,7 @@
                 <th>入库总数量</th>
                 <th>库存总数量</th>
                 <th>已领取数量</th>
+                <th>状态</th>
                 <th>单价</th>
                 <th>操作</th>
             </tr>
@@ -84,19 +85,22 @@
                     <td>${obj.f_total}</td>
                     <td>${obj.f_inventory}</td>
                     <td>${obj.f_received}</td>
+                    <td id="td_status">${obj.f_status}</td>
                     <td>${obj.f_price}</td>
                     <td>
-                        <a href="update?id=${obj.f_ID}">修改</a>
-                        <a href="f_delete?id=${obj.f_ID}" onclick="return del()">删除</a>
+                        <a href="update?id=${obj.f_ID}">修改信息</a>
+                        <a id="a_status" href="f_delete?id=${obj.f_ID}&status=${obj.f_status}"
+                           onclick="return del()">上架/下架</a>
                     </td>
                 </tr>
             </c:forEach>
         </table>
+        <p>注：前端实现库存“状态” int--->String 转换（0---下架；1---上架）</p>
     </div>
 </div>
 <script type="text/javascript">
     function del() {
-        if (confirm("确定要删除此条记录吗？") == true) {
+        if (confirm("确定要更改商品状态吗？") == true) {
             return true;
         } else
             return false;
