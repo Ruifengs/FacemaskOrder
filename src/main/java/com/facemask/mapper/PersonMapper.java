@@ -1,8 +1,10 @@
 package com.facemask.mapper;
 
 import com.facemask.domain.Person;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,4 +32,12 @@ public interface PersonMapper {
     //返回所有用户
     @Select("select * from person")
     List<Person> findAllperson();
+
+    //更新用户信息
+    @Update("update person set username=#{username},password=#{password},idNum=#{idNum},phoneNum=#{phoneNum} where pId=#{pId}")
+    int updatePerson(Person person);
+
+    //删除用户
+    @Delete("delete from person where pId=#{pId}")
+    int delectPerson(Integer pId);
 }

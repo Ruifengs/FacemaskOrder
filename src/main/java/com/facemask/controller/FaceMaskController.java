@@ -104,9 +104,12 @@ public class FaceMaskController {
         record.setF_num(num);
         record.setP_ID(getPersonID(request));
         if (num>0)   //库存添加
+        {
             record.setR_type(RecordEnum.ADD.ordinal());
-        else         //库存减少
+        } else         //库存减少
+        {
             record.setR_type(RecordEnum.REDUCE.ordinal());
+        }
         int res = faceMaskService.update_f(facemask,record);
         return jumpTOPage(res);
     }

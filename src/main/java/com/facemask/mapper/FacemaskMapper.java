@@ -29,8 +29,8 @@ public interface FacemaskMapper {
     @Select("select * from facemask where f_status=1")
     List<Facemask> findAllUP();
 
-    //查询所有口罩信息
-    @Select("select * from facemask")
+    //查询所有可预约的口罩的信息
+    @Select("select * from facemask where f_status=1")
     List<Facemask> findAll();
 
     //根据ID查询口罩信息
@@ -48,4 +48,12 @@ public interface FacemaskMapper {
     //根据id查某种口罩的库存
     @Select("select f_inventory from facemask where f_ID=#{id};")
     int findInventoryByFid(Integer id);
+
+    //预约成功时减库存
+    @Update("update facemask set f_inventory=f_inventory-10,f_received=f_received+10 where f_ID=#{f_ID}")
+    int subtract_f(Integer f_ID);
+
+    //根据口罩ID查看口罩类型名称
+    @Select("select f_name from facemask where f_ID=#{f_ID}")
+    String findF_Name(Integer f_ID);
 }

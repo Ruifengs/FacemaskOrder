@@ -18,6 +18,12 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--异常处理器-->
-    <bean class="com.facemask.exception.GlobalExceptionResolver" id="exceptionResolver"/>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.facemask.interceptor.LoginHandlerInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
 </beans>

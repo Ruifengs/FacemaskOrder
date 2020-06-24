@@ -44,15 +44,17 @@ public class FaceMaskServiceImpl implements FaceMaskService {
 
     @Override
     public int update_f(Facemask f, Record r) {
-        if (r.getP_ID() == null)
+        if (r.getP_ID() == null) {
             return facemaskMapper.update_f(f);
-        else {
+        } else {
             r.setF_ID(f.getF_ID());
             Date date = new Date();
             r.setR_time(date);
-            if (facemaskMapper.update_f(f) == recordMapper.save_r(r))
+            if (facemaskMapper.update_f(f) == recordMapper.save_r(r)) {
                 return 1;
-            else return 0;
+            } else {
+                return 0;
+            }
         }
     }
 
@@ -71,10 +73,11 @@ public class FaceMaskServiceImpl implements FaceMaskService {
         }
         //口罩状态
         Integer sta = (status ^ 1);
-        if (facemaskMapper.update_f_status(sta, id) == recordMapper.save_r(r))
+        if (facemaskMapper.update_f_status(sta, id) == recordMapper.save_r(r)) {
             return 1;
-        else
+        } else {
             return 0;
+        }
     }
 
     @Override
@@ -95,5 +98,15 @@ public class FaceMaskServiceImpl implements FaceMaskService {
     @Override
     public List<Facemask> findALL_UP() {
         return facemaskMapper.findAllUP();
+    }
+
+    @Override
+    public int subtract_f(Integer f_ID) {
+        return facemaskMapper.subtract_f(f_ID);
+    }
+
+    @Override
+    public String findF_Name(Integer f_ID) {
+        return facemaskMapper.findF_Name(f_ID);
     }
 }

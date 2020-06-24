@@ -16,7 +16,7 @@
                   value="jdbc:mysql://localhost:3306/facemask?serverTimezone=UTC&amp;
                   useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false"/>
         <property name="username" value="root"/>
-        <property name="password" value="root"/>
+        <property name="password" value="123456"/>
     </bean>
 
     <!--spring容器接管我们的sqlsessionFactory-->

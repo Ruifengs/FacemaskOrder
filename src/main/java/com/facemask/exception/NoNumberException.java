@@ -5,6 +5,7 @@ package com.facemask.exception;
  */
 public class NoNumberException extends RuntimeException{
     private String message;
+
     public NoNumberException(String message) {
         super(message);
     }
