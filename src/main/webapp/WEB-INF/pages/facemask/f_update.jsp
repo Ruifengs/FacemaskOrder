@@ -10,7 +10,7 @@
 <head>
     <title>修改口罩信息</title>
     <style type="text/css">
-        th{
+        th {
             text-align: right;
             padding-right: 5px;
         }

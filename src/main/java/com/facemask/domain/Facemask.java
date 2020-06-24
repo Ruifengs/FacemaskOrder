@@ -7,6 +7,7 @@ public class Facemask {
     private Integer f_inventory;     //口罩库存
     private Integer f_received;      //已领取口罩数量
     private float f_price;           //口罩单价
+    private Integer f_status;        //口罩状态     0--下架    1--启用
 
     public Integer getF_ID() {
         return f_ID;
@@ -56,6 +57,14 @@ public class Facemask {
         this.f_price = f_price;
     }
 
+    public Integer getF_status() {
+        return f_status;
+    }
+
+    public void setF_status(Integer f_status) {
+        this.f_status = f_status;
+    }
+
     @Override
     public String toString() {
         return "Facemask{" +
@@ -65,6 +74,7 @@ public class Facemask {
                 ", f_inventory=" + f_inventory +
                 ", f_received=" + f_received +
                 ", f_price=" + f_price +
+                ", f_status=" + f_status +
                 '}';
     }
 }
