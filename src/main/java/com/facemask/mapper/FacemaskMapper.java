@@ -25,9 +25,9 @@ public interface FacemaskMapper {
     @Delete("delete from facemask where f_ID=#{id}")
     int delete_f(Integer id);
 
-    //查询所有口罩信息
-    @Select("select * from facemask where f_status=1")
-    List<Facemask> findAllUP();
+    //查询所有可用口罩信息
+    @Select("select * from facemask ")
+    List<Facemask> findAllStatus();
 
     //查询所有可预约的口罩的信息
     @Select("select * from facemask where f_status=1")

@@ -23,26 +23,34 @@ public class FaceMaskServiceImpl implements FaceMaskService {
     RecordMapper recordMapper;
 
     @Override
-    @Transactional(rollbackFor = {Exception.class})
-    public int save_f(Facemask f, Record r) {
-        //判断是否已经存在该名称的口罩
-        if (facemaskMapper.findByName(f.getF_name()) == null) {
-            facemaskMapper.save_f(f);
-            Facemask fa = facemaskMapper.findByName(f.getF_name());
-            r.setF_ID(fa.getF_ID());
-            r.setF_num(fa.getF_total());
-            Date date = new Date();
-            r.setR_time(date);
-            //入库操作类型
-            r.setR_type(RecordEnum.INSERT.ordinal());
-            recordMapper.save_r(r);
-            return 1;
-        } else {
-            return 0;
+    @Transactional(rollbackFor = Exception.class)
+    public int save_f(Facemask f, Record r) throws Exception {
+        try {
+            //判断是否已经存在该名称的口罩
+            if (facemaskMapper.findByName(f.getF_name()) == null) {
+                r.setF_num(f.getF_total());
+                Date date = new Date();
+                r.setR_time(date);
+                //入库操作类型
+                r.setR_type(RecordEnum.INSERT.ordinal());
+                //口罩入库操作
+                facemaskMapper.save_f(f);
+                Facemask fa = facemaskMapper.findByName(f.getF_name());
+                r.setF_ID(fa.getF_ID());
+                //添加一条入库记录
+                recordMapper.save_r(r);
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
         }
     }
 
     @Override
+    @Transactional
     public int update_f(Facemask f, Record r) {
         if (r.getP_ID() == null) {
             return facemaskMapper.update_f(f);
@@ -50,15 +58,17 @@ public class FaceMaskServiceImpl implements FaceMaskService {
             r.setF_ID(f.getF_ID());
             Date date = new Date();
             r.setR_time(date);
-            if (facemaskMapper.update_f(f) == recordMapper.save_r(r)) {
+            //更新口罩信息
+            facemaskMapper.update_f(f);
+            //添加一条入库记录
+            if (recordMapper.save_r(r) == 1)
                 return 1;
-            } else {
-                return 0;
-            }
+            else return 0;
         }
     }
 
     @Override
+    @Transactional
     public int delete_f(Integer id, Integer status, Record r) {
         r.setF_ID(id);
         Date date = new Date();
@@ -71,9 +81,12 @@ public class FaceMaskServiceImpl implements FaceMaskService {
             r.setR_type(RecordEnum.INSERT.ordinal());
             r.setF_num(facemaskMapper.findInventoryByFid(id));
         }
-        //口罩状态
+        //口罩状态取反
         Integer sta = (status ^ 1);
-        if (facemaskMapper.update_f_status(sta, id) == recordMapper.save_r(r)) {
+        //更新口罩状态
+        facemaskMapper.update_f_status(sta, id);
+        //添加一条口罩入库记录
+        if (recordMapper.save_r(r) == 1) {
             return 1;
         } else {
             return 0;
@@ -97,7 +110,7 @@ public class FaceMaskServiceImpl implements FaceMaskService {
 
     @Override
     public List<Facemask> findALL_UP() {
-        return facemaskMapper.findAllUP();
+        return facemaskMapper.findAllStatus();
     }
 
     @Override
