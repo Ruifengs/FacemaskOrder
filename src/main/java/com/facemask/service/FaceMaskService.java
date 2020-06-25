@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface FaceMaskService {
     //添加口罩信息
-    public int save_f(Facemask f, Record r);
+    public int save_f(Facemask f, Record r) throws Exception;
     //更新口罩信息
     public int update_f(Facemask f,Record r);
     //修改口罩状态

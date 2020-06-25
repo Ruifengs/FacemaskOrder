@@ -15,8 +15,8 @@
 <jsp:include page="/WEB-INF/pages/person/head.jsp"/>
 这是订单修改页面
 <form action="/order/orderModifySubmit" method="post">
-    订单号：<input name="orderId" value="${order.orderId}"><br>
-    用户ID：<input name="pId" value="${order.pId}"><br>
+    订单号：<input name="orderId" value="${order.orderId}" checked><br>
+    用户ID：<input name="pId" value="${order.pId}" checked><br>
     口罩类型：
     <select name="fmaskId">
         <option selected value="${order.fmaskId}">${fmaskType}</option>

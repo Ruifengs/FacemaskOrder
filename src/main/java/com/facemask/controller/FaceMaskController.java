@@ -31,7 +31,7 @@ public class FaceMaskController {
     @RequestMapping("/save")
     public ModelAndView save() {
         ModelAndView mv = new ModelAndView();
-        List<Facemask> list = faceMaskService.findALL_UP();
+        List<Facemask> list = faceMaskService.findAll();
         mv.addObject("list", list);
         mv.setViewName("facemask/f_save");
         return mv;
@@ -76,7 +76,7 @@ public class FaceMaskController {
     @RequestMapping("/main")
     public ModelAndView f_main() {
         ModelAndView mv = new ModelAndView();
-        List<Facemask> list = faceMaskService.findAll();
+        List<Facemask> list = faceMaskService.findALL_UP();
         int inventory = faceMaskService.findInventory();
         mv.setViewName("facemask/f_main");
         mv.addObject("list", list);
@@ -86,7 +86,7 @@ public class FaceMaskController {
 
     //口罩入库操作
     @RequestMapping("/f_save")
-    public String saveFaceMask(Facemask facemask,HttpServletRequest request){
+    public String saveFaceMask(Facemask facemask,HttpServletRequest request) throws Exception {
         System.out.println(facemask);
         Record record = new Record();
         record.setP_ID(getPersonID(request));
