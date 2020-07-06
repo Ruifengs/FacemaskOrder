@@ -5,10 +5,7 @@ import com.facemask.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +39,18 @@ public class PersonController {
         person.setPermissions(1);
         int res = personService.insert(person);
         return "success";
+    }
+
+    //普通用户首页
+    @RequestMapping("/main")
+    public String personMainPages(){
+        return "person/p_main";
+    }
+
+    //管理员首页
+    @RequestMapping("/root_main")
+    public String rootMainPages(){
+        return "manage/manage";
     }
 
 
