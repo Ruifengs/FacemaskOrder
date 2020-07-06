@@ -9,6 +9,15 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        body {
+            background-color: pink;
+        }
+        div {
+            font-size: 30px;
+            color: chocolate;
+        }
+    </style>
 </head>
 <body>
 <div>当前用户：${sessionScope.person.username}&nbsp;&nbsp;&nbsp;<a href="/person/logout">注销账号</a></div>

@@ -10,17 +10,25 @@
 <html>
 <head>
     <title>口罩入库</title>
+    <style>
+        body {
+            background-color: pink;
+            text-align: center;
+            margin-top: 200px;
+            margin-left: 450px;
+        }
+    </style>
 </head>
 <body>
 <form action="f_save" method="post">
-    名称：<input type="text" name="f_name" /><br>
-    数量：<input type="number" name="f_total" /><br>
-    单价：<input type="number" name="f_price" step="0.01" /><br>
-    <input type="submit" value="保存">&nbsp;&nbsp;&nbsp;
-    <input type="reset" value="重置">
+    名称：<input type="text" style="font-size: 35px;" name="f_name" /><br>
+    数量：<input type="number" style="font-size: 35px;" name="f_total" /><br>
+    单价：<input type="number" style="font-size: 35px;" name="f_price" step="0.01" /><br>
+    <input type="submit" style="font-size: 20px;" value="保存">&nbsp;&nbsp;&nbsp;
+    <input type="reset" style="font-size: 20px;" value="重置">
 </form>
 <br>
-<table border="1">
+<table border="1" style="font-size: 30px">
     <tr>
         <th>#</th>
         <th>名称</th>

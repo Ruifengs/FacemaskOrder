@@ -11,6 +11,9 @@
 <head>
     <title>库存管理</title>
     <style type="text/css">
+        body {
+            background-color: pink;
+        }
         div#container {
             width: 940px;
             height: 520px;
@@ -54,12 +57,12 @@
 </head>
 <body>
 <div id="container">
-    <div id="save"><a href="save">口罩入库</a></div>
-    <div id="list"><a href="record?page=1&size=5">入库记录</a></div>
+    <div id="save" style="font-size: 25px;color: red"><a href="save">口罩入库</a></div>
+    <div id="list" style="font-size: 25px;color: red"><a href="record?page=1&size=5">入库记录</a></div>
     <div id="inventory">
         <table>
             <tr>
-                <th>口罩可预约数量</th>
+                <th style="font-size: 25px">口罩可预约数量</th>
             </tr>
             <tr>
                 <td>${inventory}个</td>
@@ -85,17 +88,34 @@
                     <td>${obj.f_total}</td>
                     <td>${obj.f_inventory}</td>
                     <td>${obj.f_received}</td>
-                    <td id="td_status">${obj.f_status}</td>
+                    <td id="td_status">${obj.f_status>0?"上架":"下架"}</td>
                     <td>${obj.f_price}</td>
                     <td>
                         <a href="update?id=${obj.f_ID}">修改信息</a>
-                        <a id="a_status" href="f_delete?id=${obj.f_ID}&status=${obj.f_status}"
-                           onclick="return del()">上架/下架</a>
+                        <a id="a_status" href="delete?id=${obj.f_ID}&status=${obj.f_status}"
+                           onclick="return del()">${obj.f_status>0?"下架":"上架"}</a>
                     </td>
                 </tr>
             </c:forEach>
         </table>
-        <p>注：前端实现库存“状态” int--->String 转换（0---下架；1---上架）</p>
+        <%--        <p>注：前端实现库存“状态” int--->String 转换（0---下架；1---上架）</p>--%>
+        <%--        <script type="text/javascript">--%>
+        <%--            var stat = "";--%>
+        <%--            // function save() {--%>
+        <%--            //     var re = check();--%>
+        <%--            //     alert(re);--%>
+        <%--            // }--%>
+        <%--            function check() {--%>
+        <%--                var st = $('td_status').value;--%>
+        <%--                if(st === 0){--%>
+        <%--                    stat = "上架";--%>
+        <%--                }else{--%>
+        <%--                    stat = "下架";--%>
+        <%--                }--%>
+        <%--                return stat;--%>
+        <%--            }--%>
+        <%--        </script>--%>
+
     </div>
 </div>
 <script type="text/javascript">

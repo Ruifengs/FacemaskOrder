@@ -9,6 +9,20 @@
 <html>
 <head>
     <title>用户首页</title>
+    <style>
+        h2 {
+            font-size: 50px;
+            color: crimson;
+            /*margin-left: 10px;*/
+            text-align: left;
+        }
+        a {
+            color: blueviolet;
+            font-size: 30px;
+            text-align: center;
+            padding-right: 5px;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="head.jsp"/>

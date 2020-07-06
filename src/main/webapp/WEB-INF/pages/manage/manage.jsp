@@ -9,6 +9,19 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        body {
+            background-color: pink;
+        }
+        h2 {
+            font-size: 50px;
+            color: crimson;
+        }
+        a {
+            font-size: 30px;
+            color: chocolate;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/pages/person/head.jsp"/>

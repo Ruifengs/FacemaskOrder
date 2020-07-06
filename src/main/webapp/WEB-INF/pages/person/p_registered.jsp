@@ -9,6 +9,21 @@
 <html>
 <head>
     <title>用户注册界面</title>
+    <style>
+        body {
+            background-color: pink;
+        }
+        input {
+            padding:10px;
+            width: 200px;
+            color: black;
+            margin-bottom:10px;
+            background-color: antiquewhite;
+            border: 1px solid black;
+            border-radius:4px;
+            letter-spacing:2px;
+        }
+    </style>
 </head>
 <body>
 <form action="/person/personRegistered" method="post">
@@ -18,27 +33,29 @@
         </tr>
         <tr>
             <th>用户名</th>
-            <td><input type="text" name="username"/></td>
+            <td><input type="text" name="username" id="s1"/></td>
         </tr>
         <tr>
             <th>密码</th>
-            <td><input type="password" name="password"/></td>
+            <td><input type="password" name="password" id="s2"/></td>
+            <input width=500 type="text" style= "color: red; border-style: solid; border-width:0" name="explain1" readonly/></td>
         </tr>
         <tr>
             <th>确认密码</th>
-            <td><input type="password" name="repassword"/></td>
+            <td><input type="password" name="repassword" id="s3"/></td>
+            <input width=500 type="text" style= "color: red; border-style: solid; border-width:0" name="explain2" readonly/></td>
         </tr>
         <tr>
             <th>姓名</th>
-            <td><input type="text" name="pName"/></td>
+            <td><input type="text" name="pName" id="s4"/></td>
         </tr>
         <tr>
             <th>身份证号码</th>
-            <td><input type="text" name="idNum"/></td>
+            <td><input type="text" name="idNum" id="s5"/></td>
         </tr>
         <tr>
             <th>电话号码</th>
-            <td><input type="text" name="phoneNum"/></td>
+            <td><input type="text" name="phoneNum" id="s6"/></td>
         </tr>
         <tr>
             <td><input type="submit" value="保存" /></td>
@@ -47,6 +64,28 @@
     </table>
 </form>
 
-<p>注：前端实现-----确认两次密码是否一致，身份证、手机号码长度是否正确</p>
+<%--<p>注：前端实现-----确认两次密码是否一致，身份证、手机号码长度是否正确</p>--%>
+
+<%--<script type="text/javascript">--%>
+<%--    function Check() {--%>
+<%--        var passwd1=document.password.value;--%>
+<%--        var passwd2=document.repassword.value;--%>
+
+<%--        if (passwd1 ==="") {--%>
+<%--            document.explain1.innerText="密码空，请输入";--%>
+<%--            document.explain2.innerText="";--%>
+<%--            return;--%>
+<%--        }--%>
+<%--        if (passwd1 !== passwd2) {--%>
+<%--            document.explain1.innerText="";--%>
+<%--            document.explain2.innerText="密码不一致，请重输入";--%>
+<%--            document.password.innerText="";--%>
+<%--            document.repassword.innerText="";--%>
+<%--        } else {--%>
+<%--            document.explain1.explain1.innerText="";--%>
+<%--            document.explain2.explain2.innerText="";--%>
+<%--        }--%>
+<%--    }--%>
+<%--</script>--%>
 </body>
 </html>
