@@ -6,24 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="/WEB-INF/common/tag.jsp"%>
 <html>
 <head>
     <title>用户注册界面</title>
-    <style>
-        body {
-            background-color: pink;
-        }
-        input {
-            padding:10px;
-            width: 200px;
-            color: black;
-            margin-bottom:10px;
-            background-color: antiquewhite;
-            border: 1px solid black;
-            border-radius:4px;
-            letter-spacing:2px;
-        }
-    </style>
+    <%@include file="/WEB-INF/common/head.jsp" %>
 </head>
 <body>
 <form action="/person/personRegistered" method="post">
