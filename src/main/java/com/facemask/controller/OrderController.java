@@ -63,6 +63,8 @@ public class OrderController {
         Person person= (Person) session.getAttribute("person");
         orders.setpId(person.getpId());
         orders.setOrderTime(new Date());
+        orders.setOrderStatus(0);
+        orders.setGetFacemaskTime(null);
         Facemask facemask = faceMaskService.findByID(orders.getFmaskId());
         Result<OrderExecution> result;
         OrderExecution orderExecution = null;
@@ -136,4 +138,39 @@ public class OrderController {
         int insert = ordersService.updateOrder(order);
         return "success";
     }
+
+    //领取口罩
+    @RequestMapping("/{pId}/getFaskmask")
+    public ModelAndView getFaskmask(@PathVariable Integer pId){
+        Orders orders = ordersService.quaryOrderBypId(pId);
+        Facemask facemask = faceMaskService.findByID(orders.getFmaskId());
+        System.out.println("orders："+orders);
+        ModelAndView modelAndView = new ModelAndView();
+        String message = "";
+        if(orders.getOrderId()!=null){
+            if(orders.getOrderStatus()==0){
+                modelAndView.addObject("orders",orders);
+                modelAndView.addObject("facemask",facemask);
+            }else {
+                message = "您已经领取过口罩";
+                modelAndView.addObject("message",message);
+            }
+        }else {
+            message = "您还未预定口罩";
+        }
+        modelAndView.setViewName("person/p_getFacemask");
+        return modelAndView;
+    }
+
+    //领取口罩后保存信息
+    @RequestMapping("/{orderId}/getFaskmaskSubmit")
+    public String getFaskmaskSubmit(@PathVariable Integer orderId){
+        Orders orders = ordersService.quaryOrderByorderId(orderId);
+        orders.setOrderStatus(1);
+        orders.setGetFacemaskTime(new Date());
+        System.out.println("oooo："+orders);
+        int modify = ordersService.updateOrder(orders);
+        return "success";
+    }
+
 }

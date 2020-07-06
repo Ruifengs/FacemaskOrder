@@ -2,8 +2,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 许锐锋
-  Date: 2020/6/23
-  Time: 17:43
+  Date: 2020/7/6
+  Time: 10:08
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -13,45 +13,35 @@
 </head>
 <body>
 <jsp:include page="head.jsp"/>
-这是您的订单
+<c:if test="${orders.orderStatus==0}">
 <table border="1">
     <tr>
         <td>订单号</td>
-        <td>${order.orderId}</td>
+        <td>${orders.orderId}</td>
     </tr>
     <tr>
         <td>口罩类型</td>
-        <td>${faceType}</td>
+        <td>${facemask.f_name}</td>
     </tr>
     <tr>
         <td>口罩个数</td>
-        <td>${order.fmaskNum}</td>
+        <td>${orders.fmaskNum}</td>
     </tr>
     <tr>
         <td>价格</td>
-        <td>${order.fmaskPrice}</td>
+        <td>${orders.fmaskPrice}</td>
     </tr>
     <tr>
         <td>预约时间</td>
-        <td>${order.orderTime}</td>
+        <td>${orders.orderTime}</td>
     </tr>
     <tr>
-        <td>领取状态</td>
-        <td>
-            <c:choose>
-                <c:when test="${order.orderStatus==0}">
-                    未领取
-                </c:when>
-                <c:when test="${order.orderStatus==1}">
-                    已领取
-                </c:when>
-            </c:choose>
+        <td colspan="2">
+            <a href="/order/${orders.orderId}/getFaskmaskSubmit">领取口罩</a>
         </td>
     </tr>
-    <tr>
-        <td>领取时间</td>
-        <td>${order.getFacemaskTime}</td>
-    </tr>
+</c:if>
 </table>
+${message}
 </body>
 </html>
