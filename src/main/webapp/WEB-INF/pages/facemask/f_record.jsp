@@ -12,10 +12,13 @@
     <title>查看入库记录</title>
 </head>
 <style>
+    body {
+        background-color: pink;
+    }
     li {
         float: left;
         list-style: none;
-        margin: 5;
+        margin: auto;
     }
 </style>
 <body>
@@ -33,7 +36,7 @@
             <td>${obj.r_ID}</td>
             <td>${obj.f_Name}</td>
             <td>${obj.pName}</td>
-            <td>${obj.r_type}</td>
+            <td id="type">${obj.r_type}</td>
             <td>${obj.f_num}</td>
             <td>${obj.r_time}</td>
         </tr>
@@ -46,21 +49,35 @@
     <option value="6" <c:if test="${pageInfo.pageSize==6}">selected</c:if>>6</option>
 </select>条<br>
 <ul>
-    <li><a href="/facemask/record?page=1&size=${pageInfo.pageSize}">首页</a></li>
-    <li><a href="/facemask/record?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}">上一页</a></li>
+    <li><a href="${pageContext.request.contextPath}/facemask/record?page=1&size=${pageInfo.pageSize}">首页</a></li>
+    <li><a href="${pageContext.request.contextPath}/facemask/record?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}">上一页</a></li>
     <c:forEach begin="1" end="${pageInfo.pages}" var="pageNum">
-        <li><a href="/facemask/record?page=${pageNum}&size=${pageInfo.pageSize}">${pageNum}</a></li>
+        <li><a href="${pageContext.request.contextPath}/facemask/record?page=${pageNum}&size=${pageInfo.pageSize}">${pageNum}</a></li>
     </c:forEach>
-    <li><a href="/facemask/record?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}">下一页</a></li>
-    <li><a href="/facemask/record?page=${pageInfo.pages}&size=${pageInfo.pageSize}">尾页</a></li>
+    <li><a href="${pageContext.request.contextPath}/facemask/f_record.jsp?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}">下一页</a></li>
+    <li><a href="${pageContext.request.contextPath}/facemask/f_record.jsp?page=${pageInfo.pages}&size=${pageInfo.pageSize}">尾页</a></li>
 </ul>
 <br>
-<p>注：前端实现库存“操作类型” int--->String 转换（0---新建；1---增加；2---减少；3---删除）</p>
+<%--<p>注：前端实现库存“操作类型” int--->String 转换（0---新建；1---增加；2---减少；3---删除）</p>--%>
 
 <script type="text/javascript">
+    var dat = "";
     function changePageSize() {
         var pageSize = document.getElementsByName("pageSize")[0];
-        location.href = "/facemask/record?page=1&size=" + pageSize.value;
+        location.href = "/facemask/f_record.jsp?page=1&size=" + pageSize.value;
+    }
+    function judge() {
+        var data = ${obj.r_type};
+        if(data===0){
+            dat="新建";
+        }else if(data===1){
+            dat="增加";
+        }else if(data===2){
+            dat="减少";
+        }else{
+            dat="删除"
+        }
+        return dat;
     }
 </script>
 </body>

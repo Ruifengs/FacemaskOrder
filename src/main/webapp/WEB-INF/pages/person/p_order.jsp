@@ -10,6 +10,26 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        body {
+            background-color: pink;
+            text-align: center;
+            margin-top: 300px;
+            margin-left: 750px;
+        }
+        h1 {
+            font-size: 50px;
+            color: crimson;
+            /*margin-left: 10px;*/
+            text-align: left;
+        }
+        td {
+            font-size: 70px;
+            color: blueviolet;
+            /*margin-left: 10px;*/
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="head.jsp"/>

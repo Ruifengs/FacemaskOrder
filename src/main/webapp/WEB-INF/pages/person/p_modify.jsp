@@ -9,10 +9,37 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        body {
+            background-color: pink;
+            text-align: center;
+            margin-top: 300px;
+            margin-left: 750px;
+        }
+        h1 {
+            font-size: 50px;
+            color: crimson;
+            /*margin-left: 10px;*/
+            text-align: left;
+        }
+        input{
+            padding:10px;
+            width: 200px;
+            color: black;
+            margin-bottom:10px;
+            background-color: antiquewhite;
+            border: 1px solid black;
+            border-radius:4px;
+            letter-spacing:2px;
+        }
+        button {
+            color: grey;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="head.jsp"/>
-这是用户修改资料界面
+<h1>用户修改资料界面</h1>
 <form method="post" action="/person/${person.pId}/personModifySubmit">
     密&nbsp;&nbsp;码：<input type="password" name="password" value="${person.password}"><br>
     确认密码：<input type="password" name="repassword" value="${person.password}"><br>

@@ -9,6 +9,16 @@
 <html>
 <head>
     <title>操作成功</title>
+    <style>
+        body {
+            background-color: pink;
+            text-align: center;
+        }
+        h2 {
+            font-size: 50px;
+            color: crimson;
+        }
+    </style>
     <script type="text/javascript">
         //3秒后自动跳转
         function countDown() {

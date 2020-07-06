@@ -10,6 +10,26 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        body {
+            background-color: pink;
+            text-align: center;
+        }
+        input{
+            padding:10px;
+            width: 200px;
+            color: black;
+            margin-bottom:10px;
+            background-color: antiquewhite;
+            border: 1px solid black;
+            border-radius:4px;
+            letter-spacing:2px;
+        }
+        input[type="submit"]{
+            width: 50px;
+            background-color: brown;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/pages/person/head.jsp"/>
