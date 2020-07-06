@@ -1,10 +1,11 @@
 package com.facemask.service;
 
+import com.facemask.domain.Facemask;
 import com.facemask.domain.Orders;
 import com.facemask.dto.OrderExecution;
-import org.apache.ibatis.annotations.Select;
-
+import org.apache.ibatis.annotations.Param;
 import java.util.List;
+import java.util.Map;
 
 public interface OrdersService {
 
@@ -23,9 +24,21 @@ public interface OrdersService {
     //返回所有订单
     List<Orders> findAllOrders();
 
+    //返回所有未领取的订单
+    List<Orders> findAll_unaccalimed();
+
     //修改订单
     int updateOrder(Orders orders);
 
     //根据pId查询订单
     List<Orders> quaryOrderBypId(Integer pId);
+
+    //联合查询订单表与口罩表
+    List<Map<Orders, Facemask>> find_Details();
+
+    //联合查询订单表与口罩表，状态为未领取
+    List<Map<Orders, Facemask>> find_Details_un();
+
+    //模糊查询 pId 口罩名称,状态为未领取
+    List<Map<Orders, Facemask>> search_Details_un(String f_name);
 }

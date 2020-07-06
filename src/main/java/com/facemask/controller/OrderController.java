@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/order")
@@ -37,7 +38,7 @@ public class OrderController {
 
     //预约细则
     @RequestMapping("/rules")
-    public String rules(){
+    public String rules() {
         return "order/o_rules";
     }
 
@@ -46,22 +47,22 @@ public class OrderController {
     public ModelAndView main(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
-        Person person= (Person) session.getAttribute("person");
+        Person person = (Person) session.getAttribute("person");
         List<Facemask> facemasks = faceMaskService.findAll();
         System.out.println(person);
         System.out.println(facemasks);
         mv.setViewName("order/o_main");
-        mv.addObject("person",person);
+        mv.addObject("person", person);
         mv.addObject("facemasks", facemasks);
         return mv;
     }
 
     //对提交预约信息进行处理
-    @RequestMapping(value = "/orderSubmit",produces = {"application/json; charset=utf-8"})
+    @RequestMapping(value = "/orderSubmit", produces = {"application/json; charset=utf-8"})
     @ResponseBody
     public Result<OrderExecution> orderSubmit(Orders orders, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
-        Person person= (Person) session.getAttribute("person");
+        Person person = (Person) session.getAttribute("person");
         orders.setpId(person.getpId());
         orders.setOrderTime(new Date());
         orders.setOrderStatus(0);
@@ -69,21 +70,21 @@ public class OrderController {
         Facemask facemask = faceMaskService.findByID(orders.getFmaskId());
         Result<OrderExecution> result;
         OrderExecution orderExecution = null;
-        try{
+        try {
             orderExecution = ordersService.order(orders);
-            result = new Result<OrderExecution>(true,orderExecution);
+            result = new Result<OrderExecution>(true, orderExecution);
             return result;
-        }catch (NoNumberException e1){
+        } catch (NoNumberException e1) {
             orderExecution = new OrderExecution(facemask.getF_name(), OrderStateEnum.NO_NUMBER);
-            result = new Result<OrderExecution>(false,orderExecution);
+            result = new Result<OrderExecution>(false, orderExecution);
             return result;
-        }catch (RepeatOrderException e2){
+        } catch (RepeatOrderException e2) {
             orderExecution = new OrderExecution(facemask.getF_name(), OrderStateEnum.REPEAT_APPOINT);
-            result = new Result<OrderExecution>(false,orderExecution);
+            result = new Result<OrderExecution>(false, orderExecution);
             return result;
-        }catch (Exception e){
+        } catch (Exception e) {
             orderExecution = new OrderExecution(facemask.getF_name(), OrderStateEnum.INNER_ERROR);
-            result = new Result<OrderExecution>(false,orderExecution);
+            result = new Result<OrderExecution>(false, orderExecution);
             return result;
         }
 
@@ -101,101 +102,100 @@ public class OrderController {
 
     //查看订单功能（根据用户名显示订单）
     @GetMapping("/{pId}/findBypId")
-    public ModelAndView findBypId(@PathVariable("pId") Integer pId){
+    public ModelAndView findBypId(@PathVariable("pId") Integer pId) {
         ModelAndView mv = new ModelAndView();
         List<Orders> orders = ordersService.quaryOrderBypId(pId);
-        if(orders!=null){
+        if (orders != null) {
             List<String> facemaskName = new ArrayList<>();
-            for(Orders order : orders){
+            for (Orders order : orders) {
                 String fName = faceMaskService.findF_Name(order.getFmaskId());
                 facemaskName.add(fName);
             }
-            mv.addObject("orders",orders);
-            mv.addObject("faceType",facemaskName);
-            System.out.println("bvvvv："+facemaskName);
-        }else {
+            mv.addObject("orders", orders);
+            mv.addObject("faceType", facemaskName);
+            System.out.println("bvvvv：" + facemaskName);
+        } else {
             String message = "您还没预约！";
-            mv.addObject("message",message);
+            mv.addObject("message", message);
         }
         mv.setViewName("person/p_order");
-        System.out.println("aaaa："+orders);
+        System.out.println("aaaa：" + orders);
         return mv;
     }
 
     //删除订单
     @RequestMapping("/{orderId}/orderDelete")
-    public String orderDelete(@PathVariable Integer orderId){
+    public String orderDelete(@PathVariable Integer orderId) {
         int delete = ordersService.deleteOrders(orderId);
         return "success";
     }
 
     //跳转到修改订单页面
     @RequestMapping(value = "/{orderId}/orderModify")
-    public ModelAndView orderModify(@PathVariable Integer orderId){
+    public ModelAndView orderModify(@PathVariable Integer orderId) {
         ModelAndView mv = new ModelAndView();
         Orders order = ordersService.quaryOrderByorderId(orderId);
         String fmaskType = faceMaskService.findF_Name(order.getFmaskId());
-        System.out.println("测试修改订单: "+order+"type: "+fmaskType);
+        System.out.println("测试修改订单: " + order + "type: " + fmaskType);
         List<Facemask> facemasks = faceMaskService.findAll();
         mv.setViewName("order/o_modify");
-        mv.addObject("order",order);
-        mv.addObject("fmaskType",fmaskType);
-        mv.addObject("facemasks",facemasks);
+        mv.addObject("order", order);
+        mv.addObject("fmaskType", fmaskType);
+        mv.addObject("facemasks", facemasks);
         return mv;
     }
 
     //订单修改提交
     @RequestMapping("/orderModifySubmit")
-    public String orderModifySubmit(Orders order){
+    public String orderModifySubmit(Orders order) {
         int insert = ordersService.updateOrder(order);
         return "success";
     }
 
-    //领取口罩
-    @RequestMapping("/{pId}/getFaskmask")
-    public ModelAndView getFaskmask(@PathVariable Integer pId){
-        List<Orders> orders = ordersService.quaryOrderBypId(pId);
-        System.out.println("orders："+orders);
+    //查看领取口罩
+    @RequestMapping("/getFacemask")
+    public ModelAndView getFaskmaskPage() {
+        List<Map<Orders,Facemask>> maps = ordersService.find_Details_un();
         ModelAndView modelAndView = new ModelAndView();
-        String message = "";
-        int flag=1;
-//        if(orders.getOrderId()!=null){
-//            if(orders.getOrderStatus()==0){
-//                modelAndView.addObject("orders",orders);
-//                modelAndView.addObject("facemask",facemask);
-//            }else {
-//                message = "您已经领取过口罩";
-//                modelAndView.addObject("message",message);
-//            }
-//        }else {
-//            message = "您还未预定口罩";
-//        }
-        if(orders==null){
-            message = "您还未预定口罩";
-        }else {
-            for(Orders order:orders){
-                if(order.getOrderStatus()==0){
-                    flag=0;
-                    Facemask facemask = faceMaskService.findByID(order.getFmaskId());
-                    modelAndView.addObject("orders",order);
-                    modelAndView.addObject("facemask",facemask);
-                }
-            }
-            if(flag==1){
-                message="您预约的口罩都已经领取！";
-            }
-        }
-        modelAndView.setViewName("person/p_getFacemask");
+        modelAndView.addObject("orders", maps);
+        modelAndView.setViewName("facemask/f_get");
         return modelAndView;
     }
 
+    //搜索领取口罩
+    @RequestMapping("search")
+    public ModelAndView getFaskmaskPage_search(String search){
+        List<Map<Orders,Facemask>> maps = ordersService.search_Details_un(search);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("orders", maps);
+        modelAndView.setViewName("facemask/f_get");
+        return modelAndView;
+    }
+
+    //领取口罩或取消订单
+    @RequestMapping("rec_f")
+    public String receive_Facemask(Integer orderId, Integer method) {
+        Orders orders = ordersService.quaryOrderByorderId(orderId);
+        if (method == 1)
+            orders.setOrderStatus(1);
+        else
+            orders.setOrderStatus(-1);
+        orders.setGetFacemaskTime(new Date());
+        int modify = ordersService.updateOrder(orders);
+        if (modify == 1)
+            return "facemask/f_success";
+        else
+            return "facemask/f_fail";
+    }
+
+
     //领取口罩后保存信息
     @RequestMapping("/{orderId}/getFaskmaskSubmit")
-    public String getFaskmaskSubmit(@PathVariable Integer orderId){
+    public String getFaskmaskSubmit(@PathVariable Integer orderId) {
         Orders orders = ordersService.quaryOrderByorderId(orderId);
         orders.setOrderStatus(1);
         orders.setGetFacemaskTime(new Date());
-        System.out.println("oooo："+orders);
+        System.out.println("oooo：" + orders);
         int modify = ordersService.updateOrder(orders);
         return "success";
     }

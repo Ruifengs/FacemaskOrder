@@ -28,6 +28,7 @@
 <h2>欢迎${sessionScope.person.username}</h2>
 <a href="/facemask/main">口罩管理</a><br>
 <a href="/person/personManage">用户管理</a><br>
-<a href="/order/ordersManage">订单管理</a>
+<a href="/order/ordersManage">订单管理</a><br>
+<a href="/order/getFacemask">领取口罩</a>
 </body>
 </html>
