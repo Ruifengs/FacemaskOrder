@@ -54,11 +54,11 @@
     <c:forEach begin="1" end="${pageInfo.pages}" var="pageNum">
         <li><a href="${pageContext.request.contextPath}/facemask/record?page=${pageNum}&size=${pageInfo.pageSize}">${pageNum}</a></li>
     </c:forEach>
-    <li><a href="${pageContext.request.contextPath}/facemask/f_record.jsp?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}">下一页</a></li>
-    <li><a href="${pageContext.request.contextPath}/facemask/f_record.jsp?page=${pageInfo.pages}&size=${pageInfo.pageSize}">尾页</a></li>
+    <li><a href="${pageContext.request.contextPath}/facemask/record?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}">下一页</a></li>
+    <li><a href="${pageContext.request.contextPath}/facemask/record?page=${pageInfo.pages}&size=${pageInfo.pageSize}">尾页</a></li>
 </ul>
 <br>
-<%--<p>注：前端实现库存“操作类型” int--->String 转换（0---新建；1---增加；2---减少；3---删除）</p>--%>
+<p>注：库存“操作类型” （0---新建；1---增加；2---减少；3---删除）</p>
 
 <script type="text/javascript">
     var dat = "";

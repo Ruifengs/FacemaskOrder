@@ -43,7 +43,7 @@
     </c:forEach>
 </select><br>
     口罩个数：<input name="fmaskNum" type="text" value="10"><br>
-    价&nbsp;&nbsp;格：<input name="fmaskPrice" type="text" value="前端实现下根据口罩类型随价格变动（异步）">
+    价&nbsp;&nbsp;格：<input name="fmaskPrice" type="text" value="15">
     <button type="submit">预约</button>
 </form>
 </body>

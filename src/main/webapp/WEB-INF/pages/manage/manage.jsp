@@ -26,7 +26,6 @@
 <body>
 <jsp:include page="/WEB-INF/pages/person/head.jsp"/>
 <h2>欢迎${sessionScope.person.username}</h2>
-这是管理界面<br>
 <a href="/facemask/main">口罩管理</a><br>
 <a href="/person/personManage">用户管理</a><br>
 <a href="/order/ordersManage">订单管理</a>

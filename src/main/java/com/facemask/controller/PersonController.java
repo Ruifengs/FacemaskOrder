@@ -38,7 +38,7 @@ public class PersonController {
     public String personRegisteredSubmit(Person person) {
         person.setPermissions(1);
         int res = personService.insert(person);
-        return "success";
+        return "person/person_r_success";
     }
 
     //普通用户首页
