@@ -32,7 +32,7 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public Orders quaryOrderBypId(Integer pId) {
+    public List<Orders> quaryOrderBypId(Integer pId) {
         return ordersMapper.quaryOrderBypId(pId);
     }
 
@@ -68,16 +68,21 @@ public class OrdersServiceImpl implements OrdersService {
             if (inventory < 10) {
                 throw new NoNumberException("没有库存");
             } else {
-                Orders orders1 = ordersMapper.quaryOrderBypId(orders.getpId());
-                if (orders1!=null) {
-                    //重复预约
-                    throw new RepeatOrderException("重复预约");
-                } else {
+                List<Orders> orders1 = ordersMapper.quaryOrderBypId(orders.getpId());
+                int flag=1; //判断已有订单是否领取，都领取为1,则可以继续预约；没领取为0
+                for(Orders orders2 : orders1){
+                    if (orders2.getOrderStatus() == 0) {
+                        flag = 0;
+                        break;
+                    }
+                }
+                if(orders1==null || flag==1){
                     int insert = ordersMapper.insertOrders(orders);
                     int subtract = facemaskMapper.subtract_f(orders.getFmaskId());
                     String facemaskName = facemaskMapper.findF_Name(orders.getFmaskId());
-
                     return new OrderExecution(facemaskName,OrderStateEnum.SUCCESS);
+                }else {
+                    throw new RepeatOrderException("重复预约");
                 }
 
             }

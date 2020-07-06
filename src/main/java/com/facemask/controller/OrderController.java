@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -102,11 +103,22 @@ public class OrderController {
     @GetMapping("/{pId}/findBypId")
     public ModelAndView findBypId(@PathVariable("pId") Integer pId){
         ModelAndView mv = new ModelAndView();
-        Orders order = ordersService.quaryOrderBypId(pId);
-        Facemask facemask = faceMaskService.findByID(order.getFmaskId());
-        mv.addObject("order",order);
-        mv.addObject("faceType",facemask.getF_name());
+        List<Orders> orders = ordersService.quaryOrderBypId(pId);
+        if(orders!=null){
+            List<String> facemaskName = new ArrayList<>();
+            for(Orders order : orders){
+                String fName = faceMaskService.findF_Name(order.getFmaskId());
+                facemaskName.add(fName);
+            }
+            mv.addObject("orders",orders);
+            mv.addObject("faceType",facemaskName);
+            System.out.println("bvvvv："+facemaskName);
+        }else {
+            String message = "您还没预约！";
+            mv.addObject("message",message);
+        }
         mv.setViewName("person/p_order");
+        System.out.println("aaaa："+orders);
         return mv;
     }
 
@@ -142,21 +154,36 @@ public class OrderController {
     //领取口罩
     @RequestMapping("/{pId}/getFaskmask")
     public ModelAndView getFaskmask(@PathVariable Integer pId){
-        Orders orders = ordersService.quaryOrderBypId(pId);
-        Facemask facemask = faceMaskService.findByID(orders.getFmaskId());
+        List<Orders> orders = ordersService.quaryOrderBypId(pId);
         System.out.println("orders："+orders);
         ModelAndView modelAndView = new ModelAndView();
         String message = "";
-        if(orders.getOrderId()!=null){
-            if(orders.getOrderStatus()==0){
-                modelAndView.addObject("orders",orders);
-                modelAndView.addObject("facemask",facemask);
-            }else {
-                message = "您已经领取过口罩";
-                modelAndView.addObject("message",message);
-            }
-        }else {
+        int flag=1;
+//        if(orders.getOrderId()!=null){
+//            if(orders.getOrderStatus()==0){
+//                modelAndView.addObject("orders",orders);
+//                modelAndView.addObject("facemask",facemask);
+//            }else {
+//                message = "您已经领取过口罩";
+//                modelAndView.addObject("message",message);
+//            }
+//        }else {
+//            message = "您还未预定口罩";
+//        }
+        if(orders==null){
             message = "您还未预定口罩";
+        }else {
+            for(Orders order:orders){
+                if(order.getOrderStatus()==0){
+                    flag=0;
+                    Facemask facemask = faceMaskService.findByID(order.getFmaskId());
+                    modelAndView.addObject("orders",order);
+                    modelAndView.addObject("facemask",facemask);
+                }
+            }
+            if(flag==1){
+                message="您预约的口罩都已经领取！";
+            }
         }
         modelAndView.setViewName("person/p_getFacemask");
         return modelAndView;
