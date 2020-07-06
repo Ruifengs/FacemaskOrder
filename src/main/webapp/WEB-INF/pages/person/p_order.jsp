@@ -13,45 +13,35 @@
 </head>
 <body>
 <jsp:include page="head.jsp"/>
-这是您的订单
 <table border="1">
-    <tr>
-        <td>订单号</td>
-        <td>${order.orderId}</td>
-    </tr>
-    <tr>
-        <td>口罩类型</td>
-        <td>${faceType}</td>
-    </tr>
-    <tr>
-        <td>口罩个数</td>
-        <td>${order.fmaskNum}</td>
-    </tr>
-    <tr>
-        <td>价格</td>
-        <td>${order.fmaskPrice}</td>
-    </tr>
-    <tr>
-        <td>预约时间</td>
-        <td>${order.orderTime}</td>
-    </tr>
-    <tr>
-        <td>领取状态</td>
-        <td>
-            <c:choose>
-                <c:when test="${order.orderStatus==0}">
-                    未领取
-                </c:when>
-                <c:when test="${order.orderStatus==1}">
-                    已领取
-                </c:when>
-            </c:choose>
-        </td>
-    </tr>
-    <tr>
-        <td>领取时间</td>
-        <td>${order.getFacemaskTime}</td>
-    </tr>
+        <tr>
+            <td>订单号</td>
+            <td>口罩类型</td>
+            <td>口罩个数</td>
+            <td>价格</td>
+            <td>预约时间</td>
+            <td>领取状态</td>
+        </tr>
+        <c:forEach var="order" items="${orders}" varStatus="loop">
+        <tr>
+            <td>${order.orderId}</td>
+            <td>${faceType[loop.count-1]}</td>
+            <td>${order.fmaskNum}</td>
+            <td>${order.fmaskPrice}</td>
+            <td>${order.orderTime}</td>
+            <td>
+                <c:choose>
+                    <c:when test="${order.orderStatus==0}">
+                        未领取
+                    </c:when>
+                    <c:when test="${order.orderStatus==1}">
+                        已领取
+                    </c:when>
+                </c:choose>
+            </td>
+        </tr>
+        </c:forEach>
 </table>
+${message}
 </body>
 </html>

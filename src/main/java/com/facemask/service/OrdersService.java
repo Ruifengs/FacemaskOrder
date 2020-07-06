@@ -27,5 +27,5 @@ public interface OrdersService {
     int updateOrder(Orders orders);
 
     //根据pId查询订单
-    Orders quaryOrderBypId(Integer pId);
+    List<Orders> quaryOrderBypId(Integer pId);
 }

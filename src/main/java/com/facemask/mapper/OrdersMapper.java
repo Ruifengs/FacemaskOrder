@@ -30,7 +30,7 @@ public interface OrdersMapper {
 
     //根据pId查询订单
     @Select("select * from Orders where pId=#{pId}")
-    Orders quaryOrderBypId(Integer pId);
+    List<Orders> quaryOrderBypId(Integer pId);
 
     //删除订单，口罩领取后删除订单
     @Delete("delete from Orders where orderId=#{orderId}")
