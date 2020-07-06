@@ -17,7 +17,7 @@ import java.util.List;
 public interface OrdersMapper {
 
     //添加订单
-    @Insert("insert into Orders (pId,fmaskId,fmaskNum,fmaskPrice,orderTime) values(#{pId},#{fmaskId},#{fmaskNum},#{fmaskPrice},#{orderTime})")
+    @Insert("insert into Orders (pId,fmaskId,fmaskNum,fmaskPrice,orderTime,orderStatus,getFacemaskTime) values(#{pId},#{fmaskId},#{fmaskNum},#{fmaskPrice},#{orderTime},#{orderStatus},#{getFacemaskTime})")
     int insertOrders(Orders orders);
 
     //返回所有订单
@@ -37,7 +37,7 @@ public interface OrdersMapper {
     int deleteOrders(int orderId);
 
     //修改订单
-    @Update("update orders set pId=#{pId},fmaskId=#{fmaskId},fmaskNum=#{fmaskNum},fmaskPrice=#{fmaskPrice},orderTime=#{orderTime} where orderId=#{orderId}")
+    @Update("update orders set pId=#{pId},fmaskId=#{fmaskId},fmaskNum=#{fmaskNum},fmaskPrice=#{fmaskPrice},orderTime=#{orderTime},orderStatus=#{orderStatus},getFacemaskTime=#{getFacemaskTime} where orderId=#{orderId}")
     int updateOrder(Orders orders);
 }
 

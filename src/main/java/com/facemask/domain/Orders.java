@@ -3,6 +3,7 @@ package com.facemask.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  * 预约订单实体类
@@ -14,6 +15,8 @@ public class Orders {
     private Integer fmaskNum;    //预约口罩数量
     private float fmaskPrice;    //口罩总价
     private Date orderTime;      //预约时间
+    private Integer orderStatus; //口罩领用状态  1--已领取 0--未领取
+    private Date getFacemaskTime; //口罩领用时间
 
     public Integer getOrderId() {
         return orderId;
@@ -63,6 +66,21 @@ public class Orders {
         this.orderTime = orderTime;
     }
 
+    public Integer getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(Integer orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public Date getGetFacemaskTime() {
+        return getFacemaskTime;
+    }
+
+    public void setGetFacemaskTime(Date getFacemaskTime) {
+        this.getFacemaskTime = getFacemaskTime;
+    }
 
     @Override
     public String toString() {
@@ -73,6 +91,7 @@ public class Orders {
                 ", fmaskNum=" + fmaskNum +
                 ", fmaskPrice=" + fmaskPrice +
                 ", orderTime=" + orderTime +
+                ", orderStatus=" + orderStatus +
                 '}';
     }
 }

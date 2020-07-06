@@ -16,5 +16,6 @@
 <a href="/order/rules">口罩预约</a><br>
 <a href="/order/${sessionScope.person.pId}/findBypId">查看订单</a><br>
 <a href="/person/${sessionScope.person.pId}/personModify">修改个人信息</a><br>
+<a href="/order/${sessionScope.person.pId}/getFaskmask">领取口罩</a>
 </body>
 </html>

@@ -22,6 +22,8 @@
             <td>口罩数量</td>
             <td>价格</td>
             <td>预约时间</td>
+            <td>领取状态</td>>
+            <td>领取时间</td>>
             <td>操作</td>
         </tr>
         <c:forEach var="order" items="${orders}">
@@ -32,6 +34,8 @@
             <td>${order.fmaskNum}</td>
             <td>${order.fmaskPrice}</td>
             <td>${order.orderTime}</td>
+            <td>${order.orderStatus}</td>
+            <td>${order.getFacemaskTime}</td>
             <td>
                 <a href="/order/${order.orderId}/orderModify">修改</a>
                 <a href="/order/${order.orderId}/orderDelete">删除</a>
