@@ -1,5 +1,6 @@
 package com.facemask.service.impl;
 
+import com.facemask.domain.Facemask;
 import com.facemask.domain.Orders;
 import com.facemask.dto.OrderExecution;
 import com.facemask.enums.OrderStateEnum;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -37,6 +39,21 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
+    public List<Map<Orders, Facemask>> find_Details() {
+        return ordersMapper.find_Details();
+    }
+
+    @Override
+    public List<Map<Orders, Facemask>> find_Details_un() {
+        return ordersMapper.find_Details_un();
+    }
+
+    @Override
+    public List<Map<Orders, Facemask>> search_Details_un(String f_name) {
+        return ordersMapper.search_Details_un(f_name);
+    }
+
+    @Override
     public Orders quaryOrderByorderId(Integer orderId) {
         return ordersMapper.quaryOrderByorderId(orderId);
     }
@@ -49,6 +66,11 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public List<Orders> findAllOrders() {
         return ordersMapper.findAllOrders();
+    }
+
+    @Override
+    public List<Orders> findAll_unaccalimed() {
+        return ordersMapper.findAll_unaccalimed();
     }
 
     @Override
