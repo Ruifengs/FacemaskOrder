@@ -22,7 +22,7 @@
     function success() {
         alert("成功！");
     }
-    location.href="/";
+    location.href="/person/main";
 </script>
 <%--<script type="text/javascript">--%>
 <%--    //3秒后自动跳转--%>

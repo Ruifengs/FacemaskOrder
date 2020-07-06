@@ -53,9 +53,9 @@ public class FaceMaskController {
     }
 
     //从session获取用户ID
-    public Integer getPersonID(HttpServletRequest request){
-        HttpSession session=request.getSession();
-        Person person= (Person) session.getAttribute("person");
+    public Integer getPersonID(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Person person = (Person) session.getAttribute("person");
         System.out.println(person);
         return person.getpId();
     }
@@ -80,66 +80,66 @@ public class FaceMaskController {
 
     //口罩入库操作
     @RequestMapping("/f_save")
-    public String saveFaceMask(Facemask facemask,HttpServletRequest request) throws Exception {
+    public String saveFaceMask(Facemask facemask, HttpServletRequest request) throws Exception {
         System.out.println(facemask);
         Record record = new Record();
         record.setP_ID(getPersonID(request));
-        int res = faceMaskService.save_f(facemask,record);
+        int res = faceMaskService.save_f(facemask, record);
         return jumpTOPage(res);
     }
 
     //更新口罩库存操作
     @RequestMapping("/f_inventory_update")
-    public String updateFaceMask_Inventory(Integer id, Integer num,HttpServletRequest request) {
+    public String updateFaceMask_Inventory(Integer id, Integer num, HttpServletRequest request) {
         Facemask facemask = faceMaskService.findByID(id);
         facemask.setF_total(facemask.getF_total() + num);
         facemask.setF_inventory(facemask.getF_inventory() + num);
         Record record = new Record();
         record.setF_num(num);
         record.setP_ID(getPersonID(request));
-        if (num>0)   //库存添加
+        if (num > 0)   //库存添加
         {
             record.setR_type(RecordEnum.ADD.ordinal());
         } else         //库存减少
         {
             record.setR_type(RecordEnum.REDUCE.ordinal());
         }
-        int res = faceMaskService.update_f(facemask,record);
+        int res = faceMaskService.update_f(facemask, record);
         return jumpTOPage(res);
     }
 
     //更新口罩信息操作
     @RequestMapping("/f_update")
-    public String updateFacmask_Info(Facemask facemask,HttpServletRequest request) {
+    public String updateFacmask_Info(Facemask facemask, HttpServletRequest request) {
         System.out.println(facemask);
-        Record record=new Record();
-        int res = faceMaskService.update_f(facemask,record);
+        Record record = new Record();
+        int res = faceMaskService.update_f(facemask, record);
         return jumpTOPage(res);
     }
 
     //删除口罩信息操作
     @RequestMapping("/f_delete")
-    public String deleteFacemask(Integer id,Integer status,HttpServletRequest request) {
-        System.out.println(id+"  "+status);
+    public String deleteFacemask(Integer id, Integer status, HttpServletRequest request) {
+        System.out.println(id + "  " + status);
         Record record = new Record();
         record.setP_ID(getPersonID(request));
-        int res = faceMaskService.delete_f(id,status,record);
+        int res = faceMaskService.delete_f(id, status, record);
         return jumpTOPage(res);
     }
 
     //查看入库记录
     @RequestMapping("/record")
     public ModelAndView findAllRecord(
-            @RequestParam(name = "page",required = true,defaultValue = "1") int page,
-            @RequestParam(name = "size", required = true,defaultValue = "5") int size){
-        ModelAndView mv=new ModelAndView();
-        List<Record> list=recordService.findAll(page,size);
+            @RequestParam(name = "page", required = true, defaultValue = "1") int page,
+            @RequestParam(name = "size", required = true, defaultValue = "5") int size) {
+        ModelAndView mv = new ModelAndView();
+        List<Record> list = recordService.findAll(page, size);
         //分页
-        PageInfo pageInfo=new PageInfo(list);
+        PageInfo pageInfo = new PageInfo(list);
         //获取总记录数
-        Integer total=recordService.findCount();
-        mv.addObject("pageInfo",pageInfo);
-        mv.addObject("total",total);
+        Integer total = recordService.findCount();
+        mv.addObject("pageInfo", pageInfo);
+        mv.addObject("total", total);
         mv.setViewName("facemask/f_record");
         return mv;
     }
