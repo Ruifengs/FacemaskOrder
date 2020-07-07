@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>--%>
 <%@include file="/WEB-INF/common/tag.jsp"%>
 <html>
 <head>
@@ -37,21 +38,13 @@
                     <td>${order.orderTime}</td>
                     <td>
                         <a href="/order/${order.orderId}/orderModify">修改</a>
-                        <a href="/order/${order.orderId}/orderDelete">删除</a>
+                        <a href="/order/${order.orderId}/orderDelete" >删除</a>
                     </td>
                 </tr>
                 </c:forEach>
                 </tbody>
             </table>
         </div>
-<%--        <div class="panel-body text-center">--%>
-<%--            <h2 class="text-danger">--%>
-<%--                <!--用来展示预约控件-->--%>
-<%--                <span class="glyphicon" id="appoint-box"></span> <!--在js里面调用这个id还可以动态显示一些其他东西，例如动态时间等（需要插件）-->--%>
-
-<%--                <span class="glyphicon"><a class="btn btn-primary btn-lg" href="/books/appoint?studentId=${cookie['studentId'].value}" target="_blank">查看我的已预约书籍</a></span>--%>
-<%--            </h2>           <!--如何获取该页面弹出层输入的学生ID， 传给上面的url-->--%>
-<%--        </div>--%>
     </div>
 </div>
 <%--jQery文件,务必在bootstrap.min.js之前引入--%>

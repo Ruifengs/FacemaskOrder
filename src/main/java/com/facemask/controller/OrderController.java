@@ -127,7 +127,7 @@ public class OrderController {
     @RequestMapping("/{orderId}/orderDelete")
     public String orderDelete(@PathVariable Integer orderId) {
         int delete = ordersService.deleteOrders(orderId);
-        return "success";
+        return "/person/p_success";
     }
 
     //跳转到修改订单页面
