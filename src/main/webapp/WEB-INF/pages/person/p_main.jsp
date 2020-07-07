@@ -142,6 +142,15 @@
             border-radius: 5px;
             border:1px solid #f57421;
         }
+        #middel_last{
+            height: 40px;
+            width: 300px;
+            position: relative;
+            left: 22px;
+            top:170px;
+            border-radius: 5px;
+            border:1px solid #f57421;
+        }
         .middle a{
             text-decoration:none;
             display: block; /* 设置为块元素 */
@@ -186,6 +195,9 @@
             </div>
             <div id="middle_footer">
                 <a href="/person/${sessionScope.person.pId}/personModify">修改个人信息</a>
+            </div>
+            <div id="middel_last">
+                &nbsp;<a href="/person/logout">注销账号</a>
             </div>
         </div>
     </div>

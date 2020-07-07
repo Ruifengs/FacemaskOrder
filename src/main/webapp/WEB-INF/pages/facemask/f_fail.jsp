@@ -10,13 +10,21 @@
 <head>
     <title>操作失败</title>
     <style>
-        body {
-            background-color: pink;
-            text-align: center;
-        }
+
         h2 {
             font-size: 50px;
             color: crimson;
+        }
+        div#top {
+            width: 420px;
+            height: 220px; /*设置div的大小*/
+            left: 50%;
+            top: 50%;
+            border: 1px solid green; /*边框*/
+            text-align: center; /*文字水平居中对齐*/
+            /*line-height: 200px; !*设置文字行距等于div的高度*!*/
+            /*overflow: hidden;*/
+            margin: 0 auto;
         }
     </style>
     <script type="text/javascript">
@@ -35,8 +43,10 @@
     </script>
 </head>
 <body>
-<h2>这里是Fail界面</h2>
-<p><span id="Time">3</span>秒后自动跳转</p>
-<a href="main">如果没有自动跳转，请点这里！</a>
+<div id="top">
+    <div id="in1"><h2>操作失败</h2></div>
+    <div id="in2"><p><span id="Time">3</span>秒后自动跳转</p></div>
+    <div id="in3"><a href="main">如果没有自动跳转，请点这里！</a></div>
+</div>
 </body>
 </html>
