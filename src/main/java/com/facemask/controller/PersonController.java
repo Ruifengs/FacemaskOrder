@@ -116,7 +116,7 @@ public class PersonController {
     public String personDelete(@PathVariable Integer pId){
         int delete = personService.delectPerson(pId);
         System.out.println("deleteOK:"+delete);
-        return "success";
+        return "/person/p_success";
     }
 
 }

@@ -1,0 +1,121 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    width: 100%;
+    height:100%;
+    background-image: url("https://images.pexels.com/photos/3951858/pexels-photo-3951858.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"); /*背景图片路径设置*/
+    background-repeat:no-repeat; /*不进行平铺，图片适应窗口大小*/
+    background-attachment: fixed; /*背景图片固定，不随内容滚动*/
+    background-origin: border-box; /*从边框区域显示*/
+    background-size:cover;/*全部覆盖*/
+}
+
+.body{
+    width: 100%;
+    height: 650px;
+    margin-top: -100px;
+}
+
+.panel{
+    width: 350px;
+    height: 420px;
+    position: relative;
+    left: 800px;
+    top: 60px;
+    background-color: #FFFFFF;
+    border: 1px solid #f57421;
+}
+
+.top{
+    height:60px;
+    border-bottom:1px solid #f57421;
+}
+
+.top>p{
+    text-align: center;
+    padding-top: 15px;
+    /*margin: 20px 0;*/
+    font-size: 25px;
+    color: #f57421;
+}
+
+.middle{
+    position: relative;
+    height: 290px;
+    margin: 10px 0;
+    /*background-color: red;*/
+    border-bottom:1px solid #f57421;
+}
+
+.middle>form>input{
+    height: 40px;
+    width: 290px;
+    margin: 20px 30px;
+    border: 1px solid #e0e0e0;
+}
+
+.middle>form>input:last-child{
+    background-color: #f57421;
+    font-size: 18px;
+    color: #FFFFFF;
+}
+
+.middle>form>input:last-child:hover{
+    background-color: #f57421;
+    opacity: 0.7;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/*.middle>form>.s1{*/
+/*    height: 40px;*/
+/*    width: 40px;*/
+/*    position: absolute;*/
+/*    left: 35px;*/
+/*    top: 40px;*/
+/*    background: url("../images/J1.PNG") no-repeat;*/
+/*}*/
+
+/*.middle>form>.s2{*/
+/*    height: 40px;*/
+/*    width: 40px;*/
+/*    position: absolute;*/
+/*    left: 35px;*/
+/*    top: 120px;*/
+/*    background: url("../images/J2.PNG") no-repeat;*/
+/*}*/
+
+.middle>form>.erro{
+    color: red;
+    font-size: 14px;
+    margin-left:10px;
+}
+
+.tail>a{
+    float: right;
+    font-size: 12px;
+    padding: 10px;
+    text-decoration:none;
+    color: black;
+}
+
+.tail>a:hover{
+    color: red;
+}
+
+.middle>form>.iputs:hover{
+    border:1px solid red;
+}
+
+.footer{
+    margin-top: 20px;
+}
+.footer>span{
+    font-size: 15px;
+    position: relative;
+    left: 45%;
+}
