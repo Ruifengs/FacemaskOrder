@@ -94,14 +94,14 @@
             姓&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp;&nbsp;：<input type="text" name="pName" value="${person.pName}" readonly><br>
             手&nbsp;机&nbsp;号&nbsp;&nbsp;：<input type="text" name="phoneNum" value="${person.phoneNum}" readonly><br>
             口罩类型：<select name="fmaskId" id="ftype" onchange="price()">
-<%--            <c:forEach var="facemask" items="${facemasks}">--%>
-<%--                <option value =${facemask.f_ID} >${facemask.f_name}</option>--%>
-<%--            </c:forEach>--%>
+            <%--            <c:forEach var="facemask" items="${facemasks}">--%>
+            <%--                <option value =${facemask.f_ID} >${facemask.f_name}</option>--%>
+            <%--            </c:forEach>--%>
             <option>请选择</option>
             <c:forEach var="facemask" items="${facemasks}">
                 <option value =${facemask.f_ID} >${facemask.f_name}</option>
             </c:forEach>
-            </select><br>
+        </select><br>
             口罩个数：<input name="fmaskNum" type="text" value="10"><br>
             价&nbsp;&nbsp;格&nbsp;&nbsp;&nbsp;&nbsp;：<input name="fmaskPrice" type="text" value="15">
             <button type="submit">预约</button>

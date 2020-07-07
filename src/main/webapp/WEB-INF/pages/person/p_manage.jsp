@@ -5,6 +5,8 @@
 <head>
     <title>后台登录</title>
     <%@include file="/WEB-INF/common/head.jsp" %>
+<%--    <style>--%>
+<%--    </style>--%>
 </head>
 <body>
 <div class="container">
@@ -17,7 +19,7 @@
                 <thead>
                 <tr>
                     <td>账号</td>
-                    <td>密码</td>
+<%--                    <td>密码</td>--%>
                     <td>用户名</td>
                     <td>真实姓名</td>
                     <td>身份证号</td>
@@ -29,14 +31,14 @@
                 <c:forEach var="person" items="${persons}">
                     <tr>
                         <td>${person.pId}</td>
-                        <td>${person.password}</td>
+<%--                        <td>${person.password}</td>--%>
                         <td>${person.username}</td>
                         <td>${person.pName}</td>
                         <td>${person.idNum}</td>
                         <td>${person.phoneNum}</td>
                         <td>
                             <a href="/person/${person.pId}/personModify">修改</a>
-                            <a href="/person/${person.pId}/personDelete">删除</a>
+<%--                            <a href="/person/${person.pId}/personDelete">删除</a>--%>
                         </td>
                     </tr>
                 </c:forEach>

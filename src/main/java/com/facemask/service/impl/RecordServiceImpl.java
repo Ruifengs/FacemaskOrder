@@ -20,7 +20,7 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public List<Record> findAll(int page, int size) {
-        PageHelper.startPage(page,size);
+        PageHelper.startPage(page,8);
         return recordMapper.findAll();
     }
 

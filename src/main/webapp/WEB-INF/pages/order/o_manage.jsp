@@ -6,13 +6,13 @@
 <head>
     <title>口罩订单管理</title>
     <%@include file="/WEB-INF/common/head.jsp" %>
-    <jsp:include page="/WEB-INF/pages/person/head.jsp"/>
+<%--    <jsp:include page="/WEB-INF/pages/person/head.jsp"/>--%>
 </head>
 <body>
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading text-center">
-            <h2>图书详情</h2>
+            <h2>订单详情</h2>
         </div>
         <div class="panel-body">
             <table class="table table-hover">

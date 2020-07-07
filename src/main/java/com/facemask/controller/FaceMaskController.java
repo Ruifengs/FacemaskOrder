@@ -131,7 +131,7 @@ public class FaceMaskController {
     @RequestMapping("/record")
     public ModelAndView findAllRecord(
             @RequestParam(name = "page", required = true, defaultValue = "1") int page,
-            @RequestParam(name = "size", required = true, defaultValue = "5") int size) {
+            @RequestParam(name = "size", required = true, defaultValue = "8") int size) {
         ModelAndView mv = new ModelAndView();
         List<Record> list = recordService.findAll(page, size);
         //分页
