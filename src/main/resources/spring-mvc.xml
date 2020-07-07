@@ -18,13 +18,15 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+<!--    <mvc:resources  location="/WEB-INF/img/" mapping="/img/**"/>-->
+
     <!--配置登录拦截器-->
-<!--    <mvc:interceptors>-->
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/**"/>-->
-<!--            <bean class="com.facemask.interceptor.LoginHandlerInterceptor"/>-->
-<!--        </mvc:interceptor>-->
-<!--    </mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.facemask.interceptor.LoginHandlerInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <mvc:default-servlet-handler/>
 </beans>

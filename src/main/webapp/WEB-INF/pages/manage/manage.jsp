@@ -120,7 +120,7 @@
             width: 300px;
             position: relative;
             left: 22px;
-            top: 20px;
+            top: 10px;
             border-radius: 5px;
             border:1px solid #f57421;
         }
@@ -129,7 +129,7 @@
             width: 300px;
             position: relative;
             left: 22px;
-            top:70px;
+            top:30px;
             border-radius: 5px;
             border:1px solid #f57421;
         }
@@ -138,7 +138,25 @@
             width: 300px;
             position: relative;
             left: 22px;
-            top:120px;
+            top:50px;
+            border-radius: 5px;
+            border:1px solid #f57421;
+        }
+        #down_footer{
+            height: 40px;
+            width: 300px;
+            position: relative;
+            left: 22px;
+            top:70px;
+            border-radius: 5px;
+            border:1px solid #f57421;
+        }
+        #exit{
+            height: 40px;
+            width: 300px;
+            position: relative;
+            left: 22px;
+            top:88px;
             border-radius: 5px;
             border:1px solid #f57421;
         }
@@ -189,6 +207,12 @@
                 </div>
                 <div id="middle_footer">
                     <a href="/order/ordersManage">订单管理</a>
+                </div>
+                <div id="down_footer">
+                    <a href="/order/getFacemask">口罩领取</a>
+                </div>
+                <div id="exit">
+                    <a href="/person/logout">退出系统</a>
                 </div>
             </div>
         </div>
