@@ -58,11 +58,11 @@ public class OrderController {
     }
 
     //对提交预约信息进行处理
-    @RequestMapping(value = "/orderSubmit", produces = {"application/json; charset=utf-8"})
-    @ResponseBody
-    public Result<OrderExecution> orderSubmit(Orders orders, HttpServletRequest request) throws Exception {
+    @RequestMapping(value = "/orderSubmit")
+    public ModelAndView orderSubmit(Orders orders, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
         Person person = (Person) session.getAttribute("person");
+        ModelAndView mv = new ModelAndView();
         orders.setpId(person.getpId());
         orders.setOrderTime(new Date());
         orders.setOrderStatus(0);
@@ -70,23 +70,28 @@ public class OrderController {
         Facemask facemask = faceMaskService.findByID(orders.getFmaskId());
         Result<OrderExecution> result;
         OrderExecution orderExecution = null;
-        try {
-            orderExecution = ordersService.order(orders);
-            result = new Result<OrderExecution>(true, orderExecution);
-            return result;
-        } catch (NoNumberException e1) {
-            orderExecution = new OrderExecution(facemask.getF_name(), OrderStateEnum.NO_NUMBER);
-            result = new Result<OrderExecution>(false, orderExecution);
-            return result;
-        } catch (RepeatOrderException e2) {
-            orderExecution = new OrderExecution(facemask.getF_name(), OrderStateEnum.REPEAT_APPOINT);
-            result = new Result<OrderExecution>(false, orderExecution);
-            return result;
-        } catch (Exception e) {
-            orderExecution = new OrderExecution(facemask.getF_name(), OrderStateEnum.INNER_ERROR);
-            result = new Result<OrderExecution>(false, orderExecution);
-            return result;
-        }
+        mv.setViewName("/order/o_result");
+        orderExecution = ordersService.order(orders);
+        result = new Result<OrderExecution>(true, orderExecution);
+        System.out.println("result"+result);
+        mv.addObject("resutl",result);
+        return mv;
+//        } catch (NoNumberException e1) {
+//            orderExecution = new OrderExecution(facemask.getF_name(), OrderStateEnum.NO_NUMBER);
+//            result = new Result<OrderExecution>(false, orderExecution);
+//            mv.addObject("resutl",result);
+//            return mv;
+//        } catch (RepeatOrderException e2) {
+//            orderExecution = new OrderExecution(facemask.getF_name(), OrderStateEnum.REPEAT_APPOINT);
+//            result = new Result<OrderExecution>(false, orderExecution);
+//            mv.addObject("resutl",result);
+//            return mv;
+//        } catch (Exception e) {
+//            orderExecution = new OrderExecution(facemask.getF_name(), OrderStateEnum.INNER_ERROR);
+//            result = new Result<OrderExecution>(false, orderExecution);
+//            mv.addObject("resutl",result);
+//            return mv;
+//        }
 
     }
 
@@ -149,7 +154,7 @@ public class OrderController {
     @RequestMapping("/orderModifySubmit")
     public String orderModifySubmit(Orders order) {
         int insert = ordersService.updateOrder(order);
-        return "success";
+        return "/order/o_mo_success";
     }
 
     //查看领取口罩
@@ -200,4 +205,9 @@ public class OrderController {
         return "success";
     }
 
+    @RequestMapping("/mmm")
+    public String mmm()
+    {
+        return "/order/o_manage";
+    }
 }

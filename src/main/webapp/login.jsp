@@ -82,6 +82,17 @@
             font-size: 50px;
             color: chocolate;
         }
+        #register{
+            width: 100px;
+            height: 20px;
+            position: relative;
+            left: 250px;
+        }
+        #register a{
+            text-decoration: none;
+            font-size: 14px;
+            color: #f57421;
+        }
     </style>
 
 
@@ -113,9 +124,11 @@
                 <input type="password" name="password" value="" class="iputs"/>
                 <input type="submit" value="登陆"/>
             </form>
+            <div id="register">
+                <a href="/person/registered">立即注册</a>
+            </div>
         </div>
     </div>
-
 </div>
 
 </body>
